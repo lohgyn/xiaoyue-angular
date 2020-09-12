@@ -1,17 +1,18 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="'dialog'" [mode]="'over'" [opened]="false">
-    <mat-toolbar>Menu</mat-toolbar>
+<mat-sidenav-container class="sidenav-container sally-face">
+  <mat-sidenav #drawer class="sidenav sally-peek" fixedInViewport [attr.role]="'dialog'" [mode]="'over'" [opened]="false">
+    <mat-toolbar><span class="sally-hello"></span></mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item href="#"><span class="sally-face-sm"></span>Link 1</a>
+      <a mat-list-item href="#"><span class="sally-face-sm"></span>Link 2</a>
+      <a mat-list-item href="#"><span class="sally-face-sm"></span>Link 3</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content class="bg">
+  <mat-sidenav-content>
     <mat-toolbar class="toolbar" color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" class="sally-brush">
+        <span class="sally-brush"></span>
       </button>
+      <span class="line-logo"></span>
       <span>{{ title }}</span>
       <span class="toolbar-spacer"></span>
       <a aria-label="Me on twitter" mat-icon-button target="_blank" rel="noopener" href="https://twitter.com/LoHongYun"
@@ -27,7 +28,8 @@
     </mat-toolbar>
 
     <div class="content" role="main">
-      <img src="../assets/images/line-corp/btn_login_base.png">
+      <a id="web-login-button" href="#">
+      </a>
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

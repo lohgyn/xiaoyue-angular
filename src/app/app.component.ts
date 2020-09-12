@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
 
-  title = 'LINE 小月';
+  title = '小月';
 
   public constructor(private titleService: Title ) { }
   ngOnInit(): void {
