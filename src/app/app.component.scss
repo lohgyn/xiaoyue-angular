@@ -91,10 +91,10 @@
   flex: 1 1 auto;
 }
 
-.toolbar #twitter-logo {
-  height: 48px;
+.toolbar #twitter-logo:hover {
+  opacity: 0.8;
 }
 
-.toolbar #twitter-logo:hover {
+.toolbar #linkedin-logo:hover {
   opacity: 0.8;
 }
