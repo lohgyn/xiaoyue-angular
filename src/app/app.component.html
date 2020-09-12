@@ -38,7 +38,7 @@
     </mat-toolbar>
 
     <div class="content" role="main">
-      <a id="web-login-button" href="#">
+      <a ng-if="lineLoginHref != null" id="web-login-button" href="{{lineLoginHref}}">
       </a>
       <router-outlet></router-outlet>
     </div>
