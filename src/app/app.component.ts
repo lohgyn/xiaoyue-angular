@@ -1,26 +1,61 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit{
   lineLoginHref: string;
   title:string = '小月';
 
   public constructor(
     private titleService: Title,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private route: ActivatedRoute
+    
   ) {}
+
 
   ngOnInit(): void {
     this.setTitle(this.title);
     this.initLineLoginHref();
+    
+  }
+
+  ngAfterViewInit(): void {
+    this.route.queryParams.subscribe((params)=>{
+      if(params.code !== undefined) {
+        /*console.log('test0');
+        const verifyUri = 'https://api.line.me/v2/oauth/accessToken';
+        const grantType = 'authorization_code';
+        const code = params.code;
+        const channelId = environment.lineLogin.channelId;
+        const channelSecret = '02555cc8a06e228128efdc6b7a83ec35';
+        const redirectUri = environment.lineLogin.redirectUri;
+
+        const body = new HttpParams()
+        .append('grant_type', grantType)
+        .append('client_id', channelId)
+        .append('client_secret', channelSecret)
+        .append('code', code)
+        .append('redirect_uri', redirectUri)
+
+        const header = {
+          headers: new HttpHeaders()
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+        }
+
+        this.httpClient.post(verifyUri, body.toString(), header).subscribe((obj)=>{
+          console.log(obj);
+        });*/
+      }
+    })
   }
 
   public setTitle(newTitle: string): void {
@@ -28,23 +63,6 @@ export class AppComponent implements OnInit {
   }
 
   public initLineLoginHref(): void {
-
-    this.getUuid().subscribe((uuid) => {
-      const params = new HttpParams()
-        .append('response_type', 'code')
-        .append('client_id', environment.lineLogin.channelId)
-        .append('redirect_uri', environment.lineLogin.redirectUri)
-        .append('state', uuid)
-        .append('scope', environment.lineLogin.scope)
-        .append('bot_prompt', environment.lineLogin.botPrompt);
-
-        this.lineLoginHref = environment.lineLogin.authUri + "?" + params.toString();
-    });
-
-
-  }
-
-  private getUuid(): Observable<string> {
-    return this.httpClient.get(environment.apiUri + 'uuid', { responseType: 'text' });
+    this.lineLoginHref = environment.apiUri + 'line/auth';
   }
 }

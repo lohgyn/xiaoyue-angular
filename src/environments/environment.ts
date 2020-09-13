@@ -3,15 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
-  apiUri: 'https://xiaoyue-line-bot.herokuapp.com/',
-  lineLogin: {
-    authUri: 'https://access.line.me/oauth2/v2.1/authorize',
-    channelId: '1654917477',
-    redirectUri: 'http://localhost:4200/',
-    scope: 'profile',
-    botPrompt: "normal"
-  },
+  production: false,
+  apiUri: 'http://localhost:8080/xiaoyue/api/v1/',
 };
 
 
