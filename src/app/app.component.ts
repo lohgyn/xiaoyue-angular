@@ -25,11 +25,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.title = environment.appTitle;
-    this.setTitle(this.title);
+    this.setTitle('LINE ' + environment.appTitle);
   }
 
   public setTitle(title: string): void {
-    this.title = title;
     this.titleService.setTitle(title);
   }
 
@@ -40,7 +39,7 @@ export class AppComponent implements OnInit {
       oauth2UserEvent.subscribe((oauth2User:Oauth2User)=> {
         if(oauth2User != null) {
           this.oauth2User = oauth2User;
-          this.setTitle(oauth2User.displayName);
+          this.title = oauth2User.displayName;
         }
       })
     }

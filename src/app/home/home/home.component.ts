@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
 
   @Output() oauth2UserEvent: EventEmitter<Oauth2User> = new EventEmitter();
 
-  isAuthenticated: boolean = false;
   loginUri: string = null;
   oauthUser: Oauth2User = null;
 
@@ -37,12 +36,10 @@ export class HomeComponent implements OnInit {
     this.authService.getOauth2User().then(oauth2User => {
       if(oauth2User !== null) {
         this.oauth2UserEvent.emit(oauth2User);
-        this.isAuthenticated = true;
         this.oauthUser = oauth2User
 
       } else {
         this.oauthUser = null;
-        this.isAuthenticated = false;
       }
     });
 
