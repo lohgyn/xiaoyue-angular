@@ -1,0 +1,14 @@
+#web-login-button {
+  width: 151px;
+  height: 44px;
+  background: url("../../assets/images/line-corp/btn_login_base.png") no-repeat;
+  display: block;
+}
+
+#web-login-button:hover {
+  background: url("../../assets/images/line-corp/btn_login_hover.png") no-repeat;
+}
+
+#web-login-button:active {
+  background: url("../../assets/images/line-corp/btn_login_press.png") no-repeat;
+}

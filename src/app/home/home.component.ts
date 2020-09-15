@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit {
 
     this.loginUri = environment.apiUri + '/login/oauth2/authorization/line?ngsw-bypass';
 
+    this.loadLineSocialPluginScript();
     /*const userId = this.route.snapshot.queryParamMap.get('user_id');
     const accessToken = this.route.snapshot.queryParamMap.get('access_token');
     const refreshToken = this.route.snapshot.queryParamMap.get('refresh_token');
@@ -52,5 +53,16 @@ export class HomeComponent implements OnInit {
     console.info(userId);
     console.info(accessToken);
     console.info(refreshToken);*/
+  }
+
+  public loadLineSocialPluginScript() {
+    if(document.getElementById('line-social-plugin-script') === null) {
+      const node = document.createElement('script');
+      node.id = 'line-social-plugin-script'
+      node.src = "https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js";
+      node.type = 'text/javascript';
+      node.async = true;
+      document.getElementsByTagName('head')[0].appendChild(node);
+    }
   }
 }

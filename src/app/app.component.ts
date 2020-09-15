@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.title = environment.appTitle;
     this.setTitle('LINE ' + environment.appTitle);
+    this.loadLineSocialPluginScript();
   }
 
   public setTitle(title: string): void {
@@ -44,4 +45,15 @@ export class AppComponent implements OnInit {
       })
     }
  }
+
+ public loadLineSocialPluginScript() {
+  if(document.getElementById('line-social-plugin-script') === null) {
+    const node = document.createElement('script');
+    node.id = 'line-social-plugin-script'
+    node.src = "https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js";
+    node.type = 'text/javascript';
+    node.async = true;
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
+}
 }

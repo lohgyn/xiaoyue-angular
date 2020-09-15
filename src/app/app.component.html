@@ -12,32 +12,38 @@
       <a
         mat-list-item
         routerLink="home"
-        routerLinkActive="active"
         (click)="drawer.toggle()"
         ><span class="sally-face-sm"></span>home</a
       >
       <a
         mat-list-item
         routerLink="about"
-        routerLinkActive="active"
         (click)="drawer.toggle()"
-        ><span class="sally-face-sm"></span>about</a
+        ><span class="sally-face-question-sm"></span>about</a
       >
       <a
         mat-list-item
         routerLink="contact"
-        routerLinkActive="active"
         (click)="drawer.toggle()"
-        ><span class="sally-face-sm"></span>contact</a
+        ><span class="sally-face-eat-sm"></span>contact</a
       >
       <a
         *ngIf="oauth2User !== undefined"
         mat-list-item
-        routerLink="contact"
-        routerLinkActive="active"
-        (click)="drawer.toggle();authService.logout()"
-        ><span class="sally-face-sm"></span>logout</a
+        (click)="drawer.toggle(); authService.logout()"
+        ><span class="sally-face-sad-sm"></span>logout</a
       >
+      <mat-list-item>
+        <span class="sally-face-love-sm"></span>
+        <div
+          class="line-it-button"
+          data-lang="en"
+          data-type="friend"
+          data-lineid="@xiaoyue"
+          data-count="true"
+          style="display: none"
+        ></div>
+      </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -57,6 +63,7 @@
       <span class="line-logo"></span>
       <span>{{ title }}</span>
       <span class="toolbar-spacer"></span>
+
       <a
         aria-label="Me on twitter"
         mat-icon-button
@@ -104,7 +111,6 @@
         </svg>
       </a>
     </mat-toolbar>
-
     <div class="content" role="main">
       <router-outlet (activate)="onActivate($event)"></router-outlet>
     </div>
