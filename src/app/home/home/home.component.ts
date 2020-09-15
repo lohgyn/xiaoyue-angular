@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Oauth2User } from 'src/app/model/oauth2-user';
 import { AuthService } from 'src/app/service/auth.service';
@@ -18,6 +18,8 @@ import { Animations } from 'src/app/animation/animations'
 
 export class HomeComponent implements OnInit {
 
+  @Output() oauth2UserEvent: EventEmitter<Oauth2User> = new EventEmitter();
+
   isAuthenticated: boolean = false;
   loginUri: string = null;
   oauthUser: Oauth2User = null;
@@ -34,8 +36,10 @@ export class HomeComponent implements OnInit {
 
     this.authService.getOauth2User().then(oauth2User => {
       if(oauth2User !== null) {
+        this.oauth2UserEvent.emit(oauth2User);
         this.isAuthenticated = true;
         this.oauthUser = oauth2User
+
       } else {
         this.oauthUser = null;
         this.isAuthenticated = false;

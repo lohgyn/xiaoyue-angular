@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Oauth2User } from '../model/oauth2-user';
 
@@ -7,7 +8,7 @@ import { Oauth2User } from '../model/oauth2-user';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   public async isAuthenticated(): Promise<boolean> {
     return await this.getOauth2User() !== null;
@@ -32,7 +33,19 @@ export class AuthService {
     } else {
       return JSON.parse(oauth2User);
     }
-
   }
 
+  public logout(): void {
+
+    this.httpClient.post(environment.apiUri + '/login/oauth2/logout', {}, {
+      responseType: "text"
+    }).subscribe(res => {
+      console.info(res);
+    }, err => {
+      console.error(err);
+    }, () => {
+      sessionStorage.removeItem('oauth2-user');
+      this.router.navigate(['/']).finally(() => location.reload());
+    })
+  }
 }
