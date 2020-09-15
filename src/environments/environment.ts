@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUri: 'http://localhost:8080/xiaoyue/api/v1/',
+  appTitle: '小月',
+  apiUri: 'http://localhost:8080/api/v1',
 };
 
 

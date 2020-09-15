@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "build": "ng build --prod",
+    "build": "ng build",
+    "PRODbuild": "ng build --prod=true --outputPath=../target/classes/static",
+    "DEVbuild": "ng build --prod=false --outputPath=../target/classes/static",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUri: 'https://xiaoyue-api.herokuapp.com/api/v1/',
+  appTitle: '小月',
+  apiUri: 'https://xiaoyue.herokuapp.com/api/v1',
 };
