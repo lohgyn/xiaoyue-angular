@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
       }
     });
 
-    this.loginUri = environment.apiUri + '/login/oauth2/authorization/line';
+    this.loginUri = environment.apiUri + '/login/oauth2/authorization/line?ngsw-bypass';
 
     /*const userId = this.route.snapshot.queryParamMap.get('user_id');
     const accessToken = this.route.snapshot.queryParamMap.get('access_token');
