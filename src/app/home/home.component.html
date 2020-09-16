@@ -1,4 +1,4 @@
 <ng-container *ngIf="oauthUser === null">
-  <a [@inOutAnimation] id="web-login-button" href="{{ loginUri }}"> </a>
+  <a [@inOutAnimation] id="web-login-button" (click)="authService.startCheckOAuth2User()" href="{{ loginUri }}"> </a>
 </ng-container>
 

@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should load app-root content', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('xiaoyue-angular app is running!');
+    expect(page.isPresent()).toEqual(true);
   });
 
   afterEach(async () => {
