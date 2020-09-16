@@ -47,6 +47,21 @@
             ><mat-icon style="margin-right: 5px">done</mat-icon
             >Friended</mat-chip
           >
+          <mat-chip
+            class="arrow"
+            matTooltip="Number of {{ environment.appTitle }}'s friend"
+            [matTooltipPosition]="'below'"
+            color="primary"
+            style="
+              font-size: 12px;
+              margin: 0px 0px 0px 0px;
+              padding: 10px;
+              min-height: 15px;
+            "
+            >{{
+              numberOfFollower !== undefined ? numberOfFollower.followers : 0
+            }}</mat-chip
+          >
         </mat-chip-list>
       </a>
     </mat-nav-list>

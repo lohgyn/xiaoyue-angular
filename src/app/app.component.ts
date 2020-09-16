@@ -2,7 +2,9 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 import { Animations } from './animation/animations';
+import { NumberOfFollower } from './model/number-of-follower';
 import { Oauth2User } from './model/oauth2-user';
+import { ApiService } from './service/api.service';
 import { AuthService } from './service/auth.service';
 import { CheckForUpdateService } from './service/check-for-update.service';
 
@@ -15,18 +17,23 @@ import { CheckForUpdateService } from './service/check-for-update.service';
 export class AppComponent implements OnInit {
   environment = environment;
   oauth2User: Oauth2User;
+  numberOfFollower: NumberOfFollower;
   title: string;
 
   public constructor(
     public authService: AuthService,
     private titleService: Title,
-    private checkForUpdateService: CheckForUpdateService
+    private checkForUpdateService: CheckForUpdateService,
+    private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
     this.title = this.environment.appTitle;
     this.setTitle('LINE ' + this.environment.appTitle);
     this.checkForUpdateService.checkForUpdates();
+    this.apiService
+      .getNumberOfFollower()
+      .subscribe((res) => (this.numberOfFollower = res));
   }
 
   public setTitle(title: string): void {
