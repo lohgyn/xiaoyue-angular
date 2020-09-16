@@ -14,18 +14,20 @@ import { AuthService } from './service/auth.service';
 })
 export class AppComponent implements OnInit {
 
+  environment = environment;
   oauth2User: Oauth2User;
   title: string;
 
   public constructor(
+
     public authService: AuthService,
     private titleService: Title,
   ) {}
 
 
   ngOnInit(): void {
-    this.title = environment.appTitle;
-    this.setTitle('LINE ' + environment.appTitle);
+    this.title = this.environment.appTitle;
+    this.setTitle('LINE ' + this.environment.appTitle);
     this.loadLineSocialPluginScript();
   }
 

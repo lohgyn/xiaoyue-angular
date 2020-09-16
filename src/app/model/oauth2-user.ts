@@ -3,4 +3,5 @@ export interface Oauth2User {
   displayName: string;
   pictureUrl: string;
   statusMessage: string;
+  friend: boolean;
 }
