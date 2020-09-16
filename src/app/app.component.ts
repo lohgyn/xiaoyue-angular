@@ -4,6 +4,7 @@ import { environment } from '../environments/environment';
 import {Animations} from './animation/animations'
 import { Oauth2User } from './model/oauth2-user';
 import { AuthService } from './service/auth.service';
+import { CheckForUpdateService } from './service/check-for-update.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,9 +20,9 @@ export class AppComponent implements OnInit {
   title: string;
 
   public constructor(
-
     public authService: AuthService,
     private titleService: Title,
+    private checkForUpdateService: CheckForUpdateService
   ) {}
 
 
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
     this.title = this.environment.appTitle;
     this.setTitle('LINE ' + this.environment.appTitle);
     this.loadLineSocialPluginScript();
+    this.checkForUpdateService.checkForUpdates();
   }
 
   public setTitle(title: string): void {
