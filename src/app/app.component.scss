@@ -1,12 +1,3 @@
-.content {
-  display: flex;
-  margin: 82px auto 32px;
-  padding: 0 16px;
-  max-width: 960px;
-  flex-direction: column;
-  align-items: center;
-}
-
 .line-logo {
   height: 25px;
   width: 25px;
@@ -91,37 +82,5 @@
 }
 
 .sally-brush:hover {
-  opacity: 0.8;
-}
-
-.sidenav-container {
-  height: 100%;
-}
-
-.sidenav {
-  width: 250px;
-}
-
-.sidenav .mat-toolbar {
-  padding: 0 0 0 0;
-  background: inherit;
-  height: 250px;
-}
-
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-
-.toolbar-spacer {
-  flex: 1 1 auto;
-}
-
-.toolbar #twitter-logo:hover {
-  opacity: 0.8;
-}
-
-.toolbar #linkedin-logo:hover {
   opacity: 0.8;
 }
