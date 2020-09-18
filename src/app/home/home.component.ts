@@ -17,8 +17,8 @@ import { ApiService } from '../service/api.service';
   animations: [Animations.inOutAnimation],
 })
 export class HomeComponent implements OnInit {
-  @Output() oauth2UserEvent: EventEmitter<Oauth2User> = new EventEmitter();
 
+  followers = 0;
   environment: any;
 
   // doughnut chart
@@ -50,8 +50,11 @@ export class HomeComponent implements OnInit {
       .getNumberOfFollower()
       .subscribe(
         (res) => {
+
           const numberOfFollowers = res;
+
           if (numberOfFollowers.status === 'ready') {
+            this.followers = numberOfFollowers.followers;
             this.doughnutChartData = [
               [
                 numberOfFollowers.targetedReaches,

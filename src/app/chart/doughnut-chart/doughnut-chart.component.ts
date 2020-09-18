@@ -1,4 +1,11 @@
-import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { ChartOptions } from 'chart.js';
 import { BaseChartDirective, Label, MultiDataSet } from 'ng2-charts';
 
 @Component({
@@ -7,7 +14,6 @@ import { BaseChartDirective, Label, MultiDataSet } from 'ng2-charts';
   styleUrls: ['./doughnut-chart.component.scss'],
 })
 export class DoughnutChartComponent implements OnInit {
-
   @ViewChild(BaseChartDirective)
   doughtnutChart: BaseChartDirective;
 
@@ -23,17 +29,20 @@ export class DoughnutChartComponent implements OnInit {
   @Input()
   ready: boolean;
 
-  constructor() {}
+  options: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false
+  };
 
-  ngOnInit(): void {
+  constructor(  ) {}
 
-  }
+  ngOnInit(): void {}
 
-  @HostListener("window:resize", [])
+  @HostListener('window:resize', [])
   onResize() {
     this.ready = false;
-    setTimeout(()=> {
+    setTimeout(() => {
       this.ready = true;
-    },1000)
+    }, 1000);
   }
 }

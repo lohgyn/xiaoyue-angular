@@ -1,12 +1,6 @@
 @media screen and (max-width: 576px) {
-  .main-container .header .branding {
-    max-width: 8.4rem;
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  .main-container.open-hamburger-menu .header .branding {
-    width: 14.4rem;
-    max-width: 14.4rem;
+  .main-container.open-hamburger-menu .header .header-nav {
+    background: url(../assets/images/line-corp/sally/sally-peek.jpg) repeat !important;
+    background-size: 100% !important;
   }
 }

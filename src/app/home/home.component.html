@@ -1,6 +1,36 @@
-<app-main-navigation></app-main-navigation>
 <div class="content-container">
   <div class="content-area">
-    <app-doughnut-chart [title]="doughnutChartTitle" [labels]="doughnutChartLabels" [data]="doughnutChartData" [ready]="doughtnutChartReady"></app-doughnut-chart>
+    <div class="clr-row">
+      <div class="clr-col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <app-doughnut-chart
+              [labels]="doughnutChartLabels"
+              [data]="doughnutChartData"
+              [ready]="doughtnutChartReady"
+            ></app-doughnut-chart>
+          </div>
+          <div class="card-block">
+            <div class="card-title">
+              <h1>{{ doughnutChartTitle }}</h1>
+            </div>
+            <div class="card-text">
+              <p *ngFor="let item of doughnutChartLabels; index as i">
+                {{ item }}: {{ doughnutChartData[0][i] }}
+              </p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="https://lin.ee/uwocKqR"
+              ><img
+                src="https://scdn.line-apps.com/n/line_add_friends/btn/en.png"
+                alt="Add friend"
+                height="36"
+            /></a> -
+            <span class="label label-info">{{followers}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

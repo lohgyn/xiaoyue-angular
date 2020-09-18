@@ -13,12 +13,16 @@
   </clr-alerts>
   <clr-header class="header-6">
     <div class="branding">
-      <a routerLink="/home" class="nav-link">
+      <a routerLink="/home" routerLinkActive="true" class="nav-link">
         <span class="sally-face-brush-sm"></span>
         <span class="line-word-logo"></span>
         <span class="title">{{ environment.appTitle }}</span>
       </a>
     </div>
+    <div class="header-nav" [clr-nav-level]="1">
+      <a [routerLink]="['/dashboard']" routerLinkActive="router-link-active"  class="nav-link nav-text">Dashboard</a>
+    </div>
+
     <div class="header-actions">
       <ng-container
         *ngIf="
@@ -54,7 +58,11 @@
       </ng-template>
     </div>
   </clr-header>
-  <router-outlet></router-outlet>
+  <div class="content-container">
+    <div class="content-area no-padding">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </clr-main-container>
 
 <div *ngIf="spinnerService.isLoading()" class="modal-backdrop">

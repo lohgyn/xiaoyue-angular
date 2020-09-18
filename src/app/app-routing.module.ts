@@ -14,6 +14,10 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'dashboard',
+    component: HomeComponent,
+  },
+  {
     path: 'login',
     component: LoginComponent,
   },
