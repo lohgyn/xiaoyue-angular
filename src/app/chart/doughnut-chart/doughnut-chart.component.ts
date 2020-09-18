@@ -1,5 +1,4 @@
-import { ViewChild } from '@angular/core';
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { BaseChartDirective, Label, MultiDataSet } from 'ng2-charts';
 
 @Component({
@@ -13,10 +12,13 @@ export class DoughnutChartComponent implements OnInit {
   doughtnutChart: BaseChartDirective;
 
   @Input()
-  doughnutChartLabels: Label[];
+  title: string;
 
   @Input()
-  doughnutChartData: MultiDataSet;
+  labels: Label[];
+
+  @Input()
+  data: MultiDataSet;
 
   @Input()
   ready: boolean;
@@ -24,6 +26,7 @@ export class DoughnutChartComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+
   }
 
   @HostListener("window:resize", [])

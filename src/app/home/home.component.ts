@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   environment: any;
 
   // doughnut chart
+  doughnutChartTitle: string;
   doughnutChartLabels: Label[];
   doughnutChartData: MultiDataSet;
   doughtnutChartReady: boolean;
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit {
   }
 
   initDoughnutChart(): void {
+    this.doughnutChartTitle = environment.appTitle + "'s friends"
     this.doughtnutChartReady = false;
     this.doughnutChartLabels = ['Friends added', 'Target reach', 'Blocking'];
     this.doughnutChartData = [[0, 0, 0]];
