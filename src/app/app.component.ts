@@ -2,11 +2,14 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 import { Animations } from './animation/animations';
+import { Alert } from './model/alert';
 import { NumberOfFollower } from './model/number-of-follower';
 import { Oauth2User } from './model/oauth2-user';
+import { AlertService } from './service/alert.service';
 import { ApiService } from './service/api.service';
 import { AuthService } from './service/auth.service';
 import { CheckForUpdateService } from './service/check-for-update.service';
+import { SpinnerService } from './service/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -16,27 +19,41 @@ import { CheckForUpdateService } from './service/check-for-update.service';
 })
 export class AppComponent implements OnInit {
   environment = environment;
-  oauth2User: Oauth2User;
   numberOfFollower: NumberOfFollower;
-  title: string;
 
   public constructor(
     public authService: AuthService,
     private titleService: Title,
     private checkForUpdateService: CheckForUpdateService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    public alertService: AlertService,
+    public spinnerService: SpinnerService
   ) {}
 
   ngOnInit(): void {
-    this.title = this.environment.appTitle;
     this.setTitle('LINE ' + this.environment.appTitle);
     this.checkForUpdateService.checkForUpdates();
-    this.apiService
-      .getNumberOfFollower()
-      .subscribe((res) => (this.numberOfFollower = res));
+
+    this.authService.tryAuthenticate().subscribe(
+      (res) => {
+        if (res !== null) {
+          this.authService.setOauth2User(res);
+        }
+      },
+      (err) => {
+        if (!environment.production) {
+          console.error(err);
+        }
+        this.authService.stopCheckOAuth2User();
+        this.alertService.addAlert(
+          'Your session has been expired. Please log in again.',
+          'danger'
+        );
+      }
+    );
   }
 
-  public setTitle(title: string): void {
+  private setTitle(title: string): void {
     this.titleService.setTitle(title);
   }
 
@@ -44,13 +61,21 @@ export class AppComponent implements OnInit {
     const oauth2UserEvent: EventEmitter<Oauth2User> =
       componentReference.oauth2UserEvent;
 
-    if (oauth2UserEvent !== null) {
-      oauth2UserEvent.subscribe((oauth2User: Oauth2User) => {
+    if (oauth2UserEvent !== undefined) {
+      /*oauth2UserEvent.subscribe((oauth2User: Oauth2User) => {
         if (oauth2User != null) {
           this.oauth2User = oauth2User;
           this.title = oauth2User.displayName;
         }
-      });
+      });*/
     }
+  }
+
+  trackAlertBy(alert: Alert): string {
+    return alert.id;
+  }
+
+  onAlertClose(alert: Alert): void {
+    this.alertService.removeAlert(alert);
   }
 }

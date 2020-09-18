@@ -1,0 +1,20 @@
+<ng-container *ngIf="ready; then show; else loading"> </ng-container>
+
+<ng-template #show>
+  <div class="chart-wrapper">
+    <canvas
+      baseChart
+      [data]="doughnutChartData"
+      [labels]="doughnutChartLabels"
+      [chartType]="'doughnut'"
+      [legend]="true"
+    >
+    </canvas>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="centered-content-area">
+    <div class="spinner">Loading...</div>
+  </div>
+</ng-template>

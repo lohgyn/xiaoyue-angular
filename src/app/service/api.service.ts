@@ -5,13 +5,14 @@ import { environment } from 'src/environments/environment';
 import { NumberOfFollower } from '../model/number-of-follower';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) { }
-
-  getNumberOfFollower():Observable<NumberOfFollower> {
-    return this.httpClient.get<NumberOfFollower>(environment.apiUri + "/public/line/bot/followers");
+  getNumberOfFollower(): Observable<NumberOfFollower> {
+    return this.httpClient.get<NumberOfFollower>(
+      environment.apiUri + '/public/line/bot/followers'
+    );
   }
 }

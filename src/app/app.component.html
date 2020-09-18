@@ -1,4 +1,67 @@
-hello word
+<clr-main-container>
+  <clr-alerts>
+    <clr-alert
+      *ngFor="let alert of alertService.getAlerts()"
+      [clrAlertType]="alert.type"
+      [clrAlertAppLevel]="true"
+      (clrAlertClosedChange)="onAlertClose(alert)"
+    >
+      <clr-alert-item>
+        <span class="alert-text">{{ alert.text }}</span>
+      </clr-alert-item>
+    </clr-alert>
+  </clr-alerts>
+  <clr-header class="header-6">
+    <div class="branding">
+      <a routerLink="/home" class="nav-link">
+        <span class="sally-face-brush-sm"></span>
+        <span class="line-word-logo"></span>
+        <span class="title">{{ environment.appTitle }}</span>
+      </a>
+    </div>
+    <div class="header-actions">
+      <ng-container
+        *ngIf="
+          authService.getOauth2User() !== null;
+          then loggedIn;
+          else loggedOut
+        "
+      >
+      </ng-container>
+
+      <ng-template #loggedIn>
+        <clr-dropdown>
+          <button
+            class="nav-text"
+            clrDropdownTrigger
+            aria-label="open user profile"
+          >
+            {{ authService.getOauth2User().displayName }}
+            <clr-icon shape="caret down"></clr-icon>
+          </button>
+          <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+            <a routerLink="/" clrDropdownItem>Preferences</a>
+            <a clrDropdownItem (click)="authService.logout()"
+              ><span class="sally-face-sad-sm"></span>Log out</a
+            >
+          </clr-dropdown-menu>
+        </clr-dropdown>
+      </ng-template>
+      <ng-template #loggedOut>
+        <a routerLink="/login" class="nav-link nav-text"
+          ><span class="line-word-logo"></span>Log In</a
+        >
+      </ng-template>
+    </div>
+  </clr-header>
+  <router-outlet></router-outlet>
+</clr-main-container>
+
+<div *ngIf="spinnerService.isLoading()" class="modal-backdrop">
+  <div class="centered-content-area">
+    <div class="spinner">Loading...</div>
+  </div>
+</div>
 <!--
 <mat-sidenav-container [@inOutAnimation] class="sidenav-container sally-face">
   <mat-sidenav

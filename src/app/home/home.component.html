@@ -1,4 +1,6 @@
-<ng-container *ngIf="oauthUser === null">
-  <a [@inOutAnimation] id="web-login-button" (click)="authService.startCheckOAuth2User()" href="{{ loginUri }}"> </a>
-</ng-container>
-
+<app-main-navigation></app-main-navigation>
+<div class="content-container">
+  <div class="content-area">
+    <app-doughnut-chart [doughnutChartLabels]="doughnutChartLabels" [doughnutChartData]="doughnutChartData" [ready]="doughtnutChartReady"></app-doughnut-chart>
+  </div>
+</div>

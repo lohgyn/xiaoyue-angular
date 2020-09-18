@@ -1,0 +1,28 @@
+<div class="content-container">
+  <div class="content-area no-padding">
+    <div class="login-wrapper">
+      <form
+        #form
+        class="login"
+        method="GET"
+        action="{{ environment.apiUri + '/login/oauth2/authorization/line' }}"
+      >
+        <section class="title">
+          <h3 class="welcome">Welcome to</h3>
+          <span class="line-word-logo inline-block"></span><b>{{ environment.appTitle }}</b> Portal
+          <h5 class="hint">Use your <b>LINE Account</b> to sign in now</h5>
+        </section>
+        <div class="login-group">
+          <button
+            type="button"
+            class="btn btn-primary btn-block btn-line-login"
+            (click)="this.authService.startCheckOAuth2User(); form.submit()"
+          >
+            Log in with LINE Account
+          </button>
+          <a routerLink="/home" class="signup">Or back to home</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

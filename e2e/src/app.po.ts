@@ -6,6 +6,6 @@ export class AppPage {
   }
 
   isPresent(): Promise<boolean> {
-    return element(by.css('app-root .content')).isPresent() as Promise<boolean>;
+    return element(by.css('app-root')).isPresent() as Promise<boolean>;
   }
 }

@@ -1,13 +1,18 @@
 import { ApplicationRef, Injectable } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
+import { SwUpdate, UpdateAvailableEvent } from '@angular/service-worker';
 import { concat, interval } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CheckForUpdateService {
-  constructor(appRef: ApplicationRef, private updates: SwUpdate) {
+  constructor(
+    appRef: ApplicationRef,
+    private updates: SwUpdate,
+    private alertService: AlertService
+  ) {
     // Allow the app to stabilize first, before starting polling for updates with `interval()`.
     if (updates.isEnabled) {
       const appIsStable$ = appRef.isStable.pipe(
@@ -21,19 +26,20 @@ export class CheckForUpdateService {
       );
 
       everySixHoursOnceAppIsStable$.subscribe(() =>
-        updates
-          .checkForUpdate()
-          .then(() => console.log('checking for updates'))
+        updates.checkForUpdate().then()
       );
     }
   }
 
   public checkForUpdates(): void {
-    this.updates.available.subscribe((event) => this.promptUser());
-  }
-
-  private promptUser(): void {
-    console.log('updating to new version');
-    this.updates.activateUpdate().then(() => document.location.reload());
+    if (this.updates.isEnabled) {
+      this.updates.available.subscribe((event: UpdateAvailableEvent) => {
+        this.updates.activateUpdate().then(() => {
+          this.alertService.addAlert(
+            'A new update has been applied. Please reload the page to activate it.'
+          );
+        });
+      });
+    }
   }
 }
