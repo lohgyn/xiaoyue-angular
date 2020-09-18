@@ -1,12 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Label, MultiDataSet } from 'ng2-charts';
 import { Animations } from 'src/app/animation/animations';
-import { Oauth2User } from 'src/app/model/oauth2-user';
 import { AuthService } from 'src/app/service/auth.service';
 import { environment } from 'src/environments/environment';
-import { NumberOfFollower } from '../model/number-of-follower';
 import { AlertService } from '../service/alert.service';
 import { ApiService } from '../service/api.service';
 
@@ -18,7 +14,7 @@ import { ApiService } from '../service/api.service';
 })
 export class HomeComponent implements OnInit {
 
-  followers = 0;
+  friends = 0;
   environment: any;
 
   // doughnut chart
@@ -28,9 +24,6 @@ export class HomeComponent implements OnInit {
   doughtnutChartReady: boolean;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private httpClient: HttpClient,
     public authService: AuthService,
     private alertService: AlertService,
     private apiService: ApiService
@@ -54,7 +47,7 @@ export class HomeComponent implements OnInit {
           const numberOfFollowers = res;
 
           if (numberOfFollowers.status === 'ready') {
-            this.followers = numberOfFollowers.followers;
+            this.friends = numberOfFollowers.targetedReaches;
             this.doughnutChartData = [
               [
                 numberOfFollowers.targetedReaches,
