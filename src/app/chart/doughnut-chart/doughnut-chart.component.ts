@@ -43,6 +43,6 @@ export class DoughnutChartComponent implements OnInit {
     this.ready = false;
     setTimeout(() => {
       this.ready = true;
-    }, 1000);
+    }, 1);
   }
 }
