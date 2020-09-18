@@ -1,6 +1,7 @@
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 768px) {
   .main-container.open-hamburger-menu .header .header-nav {
-    background: url(../assets/images/line-corp/sally/sally-peek.jpg) repeat !important;
-    background-size: 100% !important;
+    background-image: url(../assets/images/line-corp/sally/sally-peek.jpg);
+    background-size: 100% ;
+    background-position: center
   }
 }
