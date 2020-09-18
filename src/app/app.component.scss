@@ -1,9 +1,12 @@
-
 @media screen and (max-width: 576px) {
   .main-container .header .branding {
     max-width: 8.4rem;
     min-width: 0;
     overflow: hidden;
   }
-}
 
+  .main-container.open-hamburger-menu .header .branding {
+    width: 14.4rem;
+    max-width: 14.4rem;
+  }
+}

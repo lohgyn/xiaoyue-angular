@@ -1,8 +1,10 @@
 <ng-container *ngIf="ready; then show; else loading"> </ng-container>
 
+
 <ng-template #show>
   <div class="chart-wrapper">
     <canvas
+      #doughtnutChart
       baseChart
       [data]="doughnutChartData"
       [labels]="doughnutChartLabels"
