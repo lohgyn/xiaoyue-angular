@@ -11,10 +11,14 @@ export class AlertService {
 
   addAlert(
     alert: Alert | string,
-    type?: 'info' | 'warning' | 'success' | 'danger'
+    type?: 'info' | 'warning' | 'success' | 'danger',
+    action?: {
+      text: string;
+      obj: any;
+      click(obj: any): any;
+    }
   ): void {
     if (typeof alert === 'string') {
-
       if (type === undefined) {
         type = 'info';
       } else {
@@ -23,6 +27,7 @@ export class AlertService {
         id: '' + new Date().getTime() + this.alerts.length,
         type,
         text: alert,
+        action,
       });
     } else {
       this.alerts.push(alert);

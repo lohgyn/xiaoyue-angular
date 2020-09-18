@@ -36,7 +36,15 @@ export class CheckForUpdateService {
       this.updates.available.subscribe((event: UpdateAvailableEvent) => {
         this.updates.activateUpdate().then(() => {
           this.alertService.addAlert(
-            'A new update has been applied. Please reload the page to activate it.'
+            'A new update has been applied. Please reload the page to activate it.',
+            'info',
+            {
+              text: 'Reload Now',
+              obj: document,
+              click: (document: Document) => {
+                document.location.reload();
+              },
+            }
           );
         });
       });

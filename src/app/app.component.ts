@@ -6,7 +6,6 @@ import { Alert } from './model/alert';
 import { NumberOfFollower } from './model/number-of-follower';
 import { Oauth2User } from './model/oauth2-user';
 import { AlertService } from './service/alert.service';
-import { ApiService } from './service/api.service';
 import { AuthService } from './service/auth.service';
 import { CheckForUpdateService } from './service/check-for-update.service';
 import { SpinnerService } from './service/spinner.service';
@@ -25,15 +24,22 @@ export class AppComponent implements OnInit {
     public authService: AuthService,
     private titleService: Title,
     private checkForUpdateService: CheckForUpdateService,
-    private apiService: ApiService,
     public alertService: AlertService,
     public spinnerService: SpinnerService
   ) {}
 
   ngOnInit(): void {
     this.setTitle('LINE ' + this.environment.appTitle);
+    this.tryAuthenticate();
     this.checkForUpdateService.checkForUpdates();
+  }
 
+  private setTitle(title: string): void {
+    this.titleService.setTitle(title);
+
+  }
+
+  private tryAuthenticate() {
     this.authService.tryAuthenticate().subscribe(
       (res) => {
         if (res !== null) {
@@ -51,10 +57,6 @@ export class AppComponent implements OnInit {
         );
       }
     );
-  }
-
-  private setTitle(title: string): void {
-    this.titleService.setTitle(title);
   }
 
   onActivate(componentReference): void {
