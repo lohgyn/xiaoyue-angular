@@ -35,8 +35,8 @@ export class AuthService {
     const startGetAuth2User = localStorage.getItem('start-check-oauth2-user');
 
     if (!environment.production) {
-      console.log('start-check-oauth2-user: ' + startGetAuth2User);
-      console.log('oauth2-user: ' + this.oauth2User);
+      console.log(`start-check-oauth2-user: ${startGetAuth2User}`);
+      console.log(`oauth2-user: ${this.oauth2User}`);
     }
 
     if (startGetAuth2User !== null && startGetAuth2User !== 'null') {
@@ -45,7 +45,7 @@ export class AuthService {
 
         if (oauth2UserJSON !== null && oauth2UserJSON !== 'null') {
           if (!environment.production) {
-            console.log('oauth2UserJSON: ' + oauth2UserJSON);
+            console.log(`oauth2UserJSON: ${oauth2UserJSON}`);
           }
 
           try {
@@ -56,15 +56,15 @@ export class AuthService {
             });
           } catch (error) {
             if (!environment.production) {
-              console.log('convert oauth2UserJSON error: ' + error);
+              console.log(`convert oauth2UserJSON error: ${error}`);
             }
 
             return this.httpClient.get<Oauth2User>(
-              environment.apiUri + '/user'
+              `${environment.apiUri}/user`
             );
           }
         } else {
-          return this.httpClient.get<Oauth2User>(environment.apiUri + '/user');
+          return this.httpClient.get<Oauth2User>(`${environment.apiUri}/user`);
         }
       } else {
         return new Observable<Oauth2User>((observer) => {
@@ -84,7 +84,7 @@ export class AuthService {
     this.spinnerService.setLoading(true);
     this.httpClient
       .post(
-        environment.apiUri + '/login/oauth2/logout',
+        `${environment.apiUri}/login/oauth2/logout`,
         {},
         {
           responseType: 'text',

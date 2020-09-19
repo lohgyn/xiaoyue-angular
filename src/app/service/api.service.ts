@@ -12,7 +12,7 @@ export class ApiService {
 
   getNumberOfFollower(): Observable<NumberOfFollower> {
     return this.httpClient.get<NumberOfFollower>(
-      environment.apiUri + '/public/line/bot/followers'
+      `${environment.apiUri}/public/line/bot/followers`
     );
   }
 }

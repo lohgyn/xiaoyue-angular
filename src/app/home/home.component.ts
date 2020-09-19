@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Label, MultiDataSet } from 'ng2-charts';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Animations } from 'src/app/animation/animations';
 import { AuthService } from 'src/app/service/auth.service';
 import { environment } from 'src/environments/environment';
@@ -12,7 +14,8 @@ import { ApiService } from '../service/api.service';
   styleUrls: ['./home.component.scss'],
   animations: [Animations.inOutAnimation],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  private destroySubscriber = new Subject<void>();
 
   friends = 0;
   environment: any;
@@ -34,16 +37,21 @@ export class HomeComponent implements OnInit {
     this.initDoughnutChart();
   }
 
+  ngOnDestroy(): void {
+    this.destroySubscriber.next();
+    this.destroySubscriber.complete();
+  }
+
   initDoughnutChart(): void {
-    this.doughnutChartTitle = environment.appTitle + "'s friends"
+    this.doughnutChartTitle = `${environment.appTitle}'s friends`;
     this.doughtnutChartReady = false;
     this.doughnutChartLabels = ['Friends added', 'Target reach', 'Blocking'];
     this.doughnutChartData = [[0, 0, 0]];
     this.apiService
       .getNumberOfFollower()
+      .pipe(takeUntil(this.destroySubscriber))
       .subscribe(
         (res) => {
-
           const numberOfFollowers = res;
 
           if (numberOfFollowers.status === 'ready') {

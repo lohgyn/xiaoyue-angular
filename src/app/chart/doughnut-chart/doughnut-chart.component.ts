@@ -39,7 +39,7 @@ export class DoughnutChartComponent implements OnInit {
   ngOnInit(): void {}
 
   @HostListener('window:resize', [])
-  onResize() {
+  onResize(): void {
     this.ready = false;
     setTimeout(() => {
       this.ready = true;

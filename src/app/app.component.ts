@@ -1,5 +1,7 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { Animations } from './animation/animations';
 import { Alert } from './model/alert';
@@ -16,7 +18,9 @@ import { SpinnerService } from './service/spinner.service';
   styleUrls: ['./app.component.scss'],
   animations: [Animations.inOutAnimation],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+  private destroySubscriber = new Subject<void>();
+
   environment = environment;
   numberOfFollower: NumberOfFollower;
 
@@ -29,18 +33,22 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.setTitle('LINE ' + this.environment.appTitle);
+    this.setTitle(`LINE ${this.environment.appTitle}`);
     this.tryAuthenticate();
     this.checkForUpdateService.checkForUpdates();
   }
 
-  private setTitle(title: string): void {
-    this.titleService.setTitle(title);
-
+  ngOnDestroy(): void {
+    this.destroySubscriber.next();
+    this.destroySubscriber.complete();
   }
 
-  private tryAuthenticate() {
-    this.authService.tryAuthenticate().subscribe(
+  private setTitle(title: string): void {
+    this.titleService.setTitle(title);
+  }
+
+  private tryAuthenticate(): void {
+    this.authService.tryAuthenticate().pipe(takeUntil(this.destroySubscriber)).subscribe(
       (res) => {
         if (res !== null) {
           this.authService.setOauth2User(res);

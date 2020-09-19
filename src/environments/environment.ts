@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   appTitle: '小月',
-  apiUri: 'http://localhost:8080/api/v1',
+  apiUri: '/api/v1',
 };
 
 

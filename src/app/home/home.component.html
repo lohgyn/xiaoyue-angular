@@ -21,13 +21,49 @@
             </div>
           </div>
           <div class="card-footer">
-            <a href="https://lin.ee/uwocKqR"
-              ><img
-                src="https://scdn.line-apps.com/n/line_add_friends/btn/en.png"
-                alt="Add friend"
-                height="36"
-            /></a> -
-            <span class="label label-info">{{friends}}</span>
+            <ng-container
+              *ngIf="
+                authService.getOauth2User() !== null &&
+                  authService.getOauth2User().friend;
+                then isFriend;
+                else isNotFriend
+              "
+            >
+            </ng-container>
+
+            <ng-template #isFriend>
+              <a
+                href="https://lin.ee/uwocKqR"
+                aria-label="Friended"
+                role="tooltip"
+                aria-haspopup="true"
+                class="btn btn-line tooltip tooltip-md"
+              >
+                <clr-icon shape="check" size="24"></clr-icon>
+                Friended
+                <span class="tooltip-content"
+                  >{{ environment.appTitle }} is already your friend. Chat with
+                  me now!</span
+                >
+              </a></ng-template
+            >
+            <ng-template #isNotFriend>
+              <a
+                href="https://lin.ee/uwocKqR"
+                aria-label="Add Friend"
+                role="tooltip"
+                aria-haspopup="true"
+                class="btn btn-line tooltip tooltip-md"
+              >
+                <span class="line-logo"></span>
+                Add Friend
+                <span class="tooltip-content"
+                  >Add {{ environment.appTitle }} as friend</span
+                ></a
+              ></ng-template
+            >
+
+            <span class="label label-info">{{ friends }}</span>
           </div>
         </div>
       </div>
