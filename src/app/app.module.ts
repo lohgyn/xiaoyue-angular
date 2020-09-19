@@ -1,5 +1,5 @@
 import { LayoutModule } from '@angular/cdk/layout';
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DoughnutChartComponent } from './chart/doughnut-chart/doughnut-chart.component';
 import { HomeComponent } from './home/home.component';
+import { ServerErrorInterceptor } from './interceptor/server-error.interceptor';
 import { LoginComponent } from './login/login.component';
 import { MainNavigationComponent } from './main-navigation/main-navigation.component';
 @NgModule({
@@ -31,7 +32,7 @@ import { MainNavigationComponent } from './main-navigation/main-navigation.compo
     ClarityModule,
 
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, {provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

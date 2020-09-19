@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Oauth2User } from '../model/oauth2-user';
 import { AlertService } from './alert.service';
@@ -31,52 +30,44 @@ export class AuthService {
     return this.oauth2User;
   }
 
-  public tryAuthenticate(): Observable<Oauth2User> {
-    const startGetAuth2User = localStorage.getItem('start-check-oauth2-user');
+  public tryAuthenticate(): void {
+    const startCheckOAuth2User = localStorage.getItem(
+      'start-check-oauth2-user'
+    );
 
     if (!environment.production) {
-      console.log(`start-check-oauth2-user: ${startGetAuth2User}`);
+      console.log(`start-check-oauth2-user: ${startCheckOAuth2User}`);
       console.log(`oauth2-user: ${this.oauth2User}`);
     }
 
-    if (startGetAuth2User !== null && startGetAuth2User !== 'null') {
+    if (startCheckOAuth2User !== null && startCheckOAuth2User !== 'null') {
+      let refreshOauth2User = true;
+
       if (this.oauth2User === null) {
         const oauth2UserJSON = sessionStorage.getItem('oauth2-user');
 
         if (oauth2UserJSON !== null && oauth2UserJSON !== 'null') {
-          if (!environment.production) {
-            console.log(`oauth2UserJSON: ${oauth2UserJSON}`);
-          }
-
           try {
+            if (!environment.production) {
+              console.log(`oauth2UserJSON: ${oauth2UserJSON}`);
+            }
+
             const oauth2User = JSON.parse(oauth2UserJSON);
-            return new Observable<Oauth2User>((observer) => {
-              observer.next(oauth2User);
-              observer.complete();
-            });
+            this.setOauth2User(oauth2User);
+            refreshOauth2User = false;
           } catch (error) {
             if (!environment.production) {
               console.log(`convert oauth2UserJSON error: ${error}`);
             }
-
-            return this.httpClient.get<Oauth2User>(
-              `${environment.apiUri}/user`
-            );
           }
-        } else {
-          return this.httpClient.get<Oauth2User>(`${environment.apiUri}/user`);
         }
-      } else {
-        return new Observable<Oauth2User>((observer) => {
-          observer.next(this.oauth2User);
-          observer.complete();
-        });
       }
-    } else {
-      return new Observable<Oauth2User>((observer) => {
-        observer.next(this.oauth2User);
-        observer.complete();
-      });
+
+      if (refreshOauth2User) {
+        this.httpClient
+          .get<Oauth2User>(`${environment.apiUri}/user`)
+          .subscribe((oauth2User) => this.setOauth2User(oauth2User));
+      }
     }
   }
 
@@ -90,14 +81,7 @@ export class AuthService {
           responseType: 'text',
         }
       )
-      .subscribe(
-        (res) => {
-          console.log(res);
-        },
-        (err) => {
-          console.error(err);
-        }
-      )
+      .subscribe()
       .add(() => {
         {
           localStorage.removeItem('start-check-oauth2-user');
