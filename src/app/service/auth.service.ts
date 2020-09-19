@@ -51,7 +51,7 @@ export class AuthService {
           try {
             const oauth2User = JSON.parse(oauth2UserJSON);
             return new Observable<Oauth2User>((observer) => {
-              observer.next(JSON.parse(oauth2User));
+              observer.next(oauth2User);
               observer.complete();
             });
           } catch (error) {
@@ -80,7 +80,7 @@ export class AuthService {
     }
   }
 
-  public logout(): void {
+  public logout(force?: boolean): void {
     this.spinnerService.setLoading(true);
     this.httpClient
       .post(
@@ -106,10 +106,13 @@ export class AuthService {
 
           this.router.navigate(['/']).finally(() => {
             this.spinnerService.setLoading(false);
-            this.alertService.addAlert(
-              'You have been logged out successfully.',
-              'success'
-            );
+
+            if (force !== undefined && !force) {
+              this.alertService.addAlert(
+                'You have been logged out successfully.',
+                'success'
+              );
+            }
           });
         }
       });
@@ -120,13 +123,5 @@ export class AuthService {
       console.log('start to check oauth2 user now...');
     }
     localStorage.setItem('start-check-oauth2-user', 'true');
-  }
-
-  public stopCheckOAuth2User(): void {
-    if (!environment.production) {
-      console.log('stop to check oauth2 user now...');
-    }
-
-    localStorage.removeItem('start-check-oauth2-user');
   }
 }

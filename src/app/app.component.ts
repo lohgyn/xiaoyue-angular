@@ -58,11 +58,13 @@ export class AppComponent implements OnInit, OnDestroy {
         if (!environment.production) {
           console.error(err);
         }
-        this.authService.stopCheckOAuth2User();
+
         this.alertService.addAlert(
           'Your session has been expired. Please log in again.',
           'danger'
         );
+
+        this.authService.logout(true);
       }
     );
   }
