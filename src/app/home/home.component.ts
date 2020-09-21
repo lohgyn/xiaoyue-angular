@@ -13,6 +13,7 @@ import { ApiService } from '../service/api.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   animations: [Animations.inOutAnimation],
+  host: { class: 'u-main-container' },
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private destroySubscriber = new Subject<void>();

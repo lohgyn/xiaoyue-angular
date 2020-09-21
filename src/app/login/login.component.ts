@@ -6,6 +6,7 @@ import { AuthService } from '../service/auth.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  host: {class: "u-main-container"}
 })
 export class LoginComponent implements OnInit {
 

@@ -21,7 +21,7 @@
   </clr-alerts>
   <clr-header class="header-6">
     <div class="branding">
-      <a routerLink="/home" routerLinkActive="true" class="nav-link">
+      <a routerLink="/home" routerLinkActive="active" class="nav-link">
         <span class="sally-face-brush-sm"></span>
         <span class="line-word-logo"></span>
         <span class="title">{{ environment.appTitle }}</span>
@@ -30,9 +30,15 @@
     <div class="header-nav" [clr-nav-level]="1">
       <a
         [routerLink]="['/dashboard']"
-        routerLinkActive="router-link-active"
+        routerLinkActive="active"
         class="nav-link nav-text"
         >Dashboard</a
+      >
+      <a
+        [routerLink]="['/guide']"
+        routerLinkActive="active"
+        class="nav-link nav-text"
+        >Guide</a
       >
     </div>
 
@@ -57,7 +63,9 @@
             <clr-icon shape="caret down"></clr-icon>
           </button>
           <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-            <a routerLink="/" clrDropdownItem>Preferences</a>
+            <a routerLink="/" routerLinkActive="active" clrDropdownItem
+              >Preferences</a
+            >
             <a clrDropdownItem (click)="authService.logout()"
               ><span class="sally-face-sad-sm"></span>Log out</a
             >
@@ -65,17 +73,16 @@
         </clr-dropdown>
       </ng-template>
       <ng-template #loggedOut>
-        <a routerLink="/login" class="nav-link nav-text"
+        <a
+          routerLink="/login"
+          routerLinkActive="active"
+          class="nav-link nav-text"
           ><span class="line-word-logo"></span>Log In</a
         >
       </ng-template>
     </div>
   </clr-header>
-  <div class="content-container">
-    <div class="content-area no-padding">
-      <router-outlet class="main-router-outlet"></router-outlet>
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 </clr-main-container>
 
 <div *ngIf="spinnerService.isLoading()" class="modal-backdrop">
