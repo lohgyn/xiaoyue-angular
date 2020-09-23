@@ -5,8 +5,12 @@
   height: 100%;
 }
 
+.no-margin {
+  margin: 0 !important;
+}
+
 .no-padding {
-  padding: 0px 0px 0px 0px !important;
+  padding: 0 !important;
 }
 
 .no-flex {
@@ -98,4 +102,9 @@
 
 .sally-brush:hover {
   opacity: 0.8;
+}
+
+.wall {
+  background: url(./assets/images/line-corp/sally/wall.jpg) repeat !important;
+  background-size: 100% !important;
 }
