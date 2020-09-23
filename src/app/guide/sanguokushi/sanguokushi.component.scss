@@ -1,13 +1,11 @@
-
 .sanguokushi-main-icon-sm {
   height: 48px !important;
   width: 48px !important;
-  background: url(../../../assets/images/bbg-sangokushi/main.jpg)
-    no-repeat center;
+  background: url(../../../assets/images/bbg-sangokushi/main.jpg) no-repeat
+    center;
   background-size: 100%;
   display: inline-block;
   vertical-align: middle;
-
 }
 
 .clr-row {
@@ -16,4 +14,9 @@
 
 .left-panel {
   margin-bottom: 1.2rem;
+}
+
+.main-section {
+  height: calc(100vh - (6rem));
+  overflow-y: scroll;
 }
