@@ -1,21 +1,20 @@
-.max-width {
- max-width: 45rem;
-}
-
 .guide-container {
   display: flex;
   flex: 1 1 auto;
 }
 
 .guide-content-area {
-  flex: 1 1 auto;
   order: 0;
+  flex: 1 1 auto;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  padding-bottom: 1.2rem;
 }
 
 .guide-nav {
-  flex: 0 0 auto;
-  width: 12rem;
   order: 1;
+  flex: 0 0 auto;
+  width: 30vw;
   background-image: url(../../../assets/images/line-corp/sally/wall.jpg);
   background-size: 100%;
 }
@@ -24,7 +23,7 @@
   display: flex;
   background-color: initial;
   position: fixed;
-  width: 9.7rem;
+  width: 24.3vw;
 }
 
 .guide-nav .guide-tab-container {

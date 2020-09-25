@@ -1,16 +1,16 @@
 <div class="guide-container">
   <div class="guide-content-area">
     <section id="top">
-      <div class="card card-block" style="margin-top: 0">
-        <h1 class="card-title"><b>新三國志手機版</b></h1>
-        <p class="card-text">
+      <h1><b>新三國志手機版</b></h1>
+      <h4>
+        <b>
           <ng-container [ngTemplateOutlet]="lineChickTemplate"></ng-container
-          >大家好！<b>S39-S40</b> 的專屬小月在這裏教你一些簡單的指令。<span
-            class="no-flex sally-face-love-sm inline-block vertical-align-bottom"
-            aria-hidden="true"
-          ></span>
-        </p>
-      </div>
+          >大家好！S39-S40 的專屬小月在這裏教你一些簡單的指令。<ng-container
+            [ngTemplateOutlet]="sallyFaceLoveTemplate"
+            [ngTemplateOutletContext]="{ $implicit: [0] }"
+          ></ng-container>
+        </b>
+      </h4>
     </section>
 
     <section id="xiaoyue">
@@ -21,7 +21,10 @@
         </div>
         <div class="card-block">
           <div class="card-img">
-            <img class="max-width" src="../../../assets/images/bbg-sangokushi/xiaoyue.jpg" />
+            <img
+              class="max-width"
+              src="../../../assets/images/bbg-sangokushi/xiaoyue.jpg"
+            />
           </div>
         </div>
         <div class="card-block">
@@ -62,18 +65,10 @@
         <p>
           <ng-container [ngTemplateOutlet]="lineChickTemplate"></ng-container
           >如果有興趣要加入小月的管理員，請聯絡 <b>@lohgyn</b> 或者
-          <b>彭寒劍（五皇團員）</b>，來幫忙更新游戲質詢。。。<span
-            class="no-flex sally-face-love-sm inline-block vertical-align-bottom"
-            aria-hidden="true"
-          ></span
-          ><span
-            class="no-flex sally-face-love-sm inline-block vertical-align-bottom"
-            aria-hidden="true"
-          ></span
-          ><span
-            class="no-flex sally-face-love-sm inline-block vertical-align-bottom"
-            aria-hidden="true"
-          ></span>
+          <b>彭寒劍（五皇團員）</b>，來幫忙更新游戲質詢。。。<ng-container
+            [ngTemplateOutlet]="sallyFaceLoveTemplate"
+            [ngTemplateOutletContext]="{ $implicit: [0, 1, 2] }"
+          ></ng-container>
         </p>
       </div>
     </section>
@@ -147,9 +142,18 @@
     <img
       src="{{ lineChickDataUri }}"
       alt="(chick)"
-      width="27"
-      height="23"
+      width="28"
+      height="24"
       data-emoji="chick"
+      class="vertical-align-top"
     />
+  </ng-template>
+
+  <ng-template #sallyFaceLoveTemplate let-items>
+    <span
+      *ngFor="let item of items"
+      class="no-flex sally-face-love-sm inline-block vertical-align-top"
+      aria-hidden="true"
+    ></span>
   </ng-template>
 </div>

@@ -17,12 +17,20 @@
   flex: none !important;
 }
 
+.max-width {
+  max-width: 45rem;
+}
+
 .inline-block {
   display: inline-block !important;
 }
 
 .vertical-align-bottom {
   vertical-align: bottom;
+}
+
+.vertical-align-top {
+  vertical-align: top;
 }
 
 .line-word-logo {
