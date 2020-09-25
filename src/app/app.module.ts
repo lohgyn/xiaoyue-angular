@@ -1,5 +1,9 @@
 import { LayoutModule } from '@angular/cdk/layout';
-import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpClientXsrfModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,7 +22,15 @@ import { MainNavigationComponent } from './main-navigation/main-navigation.compo
 import { GuideComponent } from './guide/guide.component';
 import { SanguokushiComponent } from './guide/sanguokushi/sanguokushi.component';
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, MainNavigationComponent, DoughnutChartComponent, GuideComponent, SanguokushiComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    LoginComponent,
+    MainNavigationComponent,
+    DoughnutChartComponent,
+    GuideComponent,
+    SanguokushiComponent,
+  ],
   imports: [
     FormsModule,
     BrowserModule,
@@ -32,9 +44,15 @@ import { SanguokushiComponent } from './guide/sanguokushi/sanguokushi.component'
     HttpClientModule,
     HttpClientXsrfModule,
     ClarityModule,
-
   ],
-  providers: [HttpClientModule, {provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true}],
+  providers: [
+    HttpClientModule,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServerErrorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

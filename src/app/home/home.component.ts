@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { Label, MultiDataSet } from 'ng2-charts';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -13,9 +13,10 @@ import { ApiService } from '../service/api.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   animations: [Animations.inOutAnimation],
-  host: { class: 'u-main-container' },
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  @HostBinding('class') class = 'u-main-container';
+
   private destroySubscriber = new Subject<void>();
 
   friends = 0;
