@@ -1,3 +1,66 @@
+.guide-container {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.guide-content-area {
+  flex: 1 1 auto;
+  order: 0;
+}
+
+.guide-nav {
+  flex: 0 0 auto;
+  width: 12rem;
+  order: 1;
+  background-image: url(../../../assets/images/line-corp/sally/wall.jpg);
+  background-size: 100%;
+}
+
+.guide-nav .guide-nav-container {
+  display: flex;
+  background-color: initial;
+  position: fixed;
+  width: 9.7rem;
+}
+
+.guide-nav .guide-tab-container {
+  display: none;
+}
+
+@media screen and (max-width: 992px) {
+  :host {
+    overflow-y: hidden !important;
+  }
+
+  .guide-container {
+    flex-direction: column;
+  }
+
+  .guide-content-area {
+    height: calc(100vh - 5rem);
+    overflow-y: scroll;
+  }
+
+  .guide-nav {
+    display: flex;
+    flex: 0 0 auto;
+    z-index: 100;
+    width: 100vw;
+    order: -1;
+    background-image: initial;
+  }
+
+  .guide-nav .guide-nav-container {
+    display: none;
+  }
+
+  .guide-nav .guide-tab-container {
+    display: flex;
+    flex: 0 0 auto;
+    width: 100vw;
+  }
+}
+
 .sanguokushi-main-icon-sm {
   height: 48px !important;
   width: 48px !important;
@@ -6,17 +69,4 @@
   background-size: 100%;
   display: inline-block;
   vertical-align: middle;
-}
-
-.clr-row {
-  margin: 0;
-}
-
-.left-panel {
-  margin-bottom: 1.2rem;
-}
-
-.main-section {
-  height: calc(100vh - (6rem));
-  overflow-y: scroll;
 }

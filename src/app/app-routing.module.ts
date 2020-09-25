@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { LoginPageGuard } from './guard/login-page.guard';
 import { GuideComponent } from './guide/guide.component';
 import { SanguokushiComponent } from './guide/sanguokushi/sanguokushi.component';

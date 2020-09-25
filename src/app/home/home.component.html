@@ -1,71 +1,67 @@
 <div class="content-container">
   <div class="content-area">
-    <div class="clr-row">
-      <div class="clr-col-sm-12">
-        <div class="card mt-0">
-          <div class="card-header">
-            <app-doughnut-chart
-              [labels]="doughnutChartLabels"
-              [data]="doughnutChartData"
-              [ready]="doughtnutChartReady"
-            ></app-doughnut-chart>
-          </div>
-          <div class="card-block">
-            <div class="card-title">
-              <h1>{{ doughnutChartTitle }}</h1>
-            </div>
-            <div class="card-text">
-              <p *ngFor="let item of doughnutChartLabels; index as i">
-                {{ item }}: {{ doughnutChartData[0][i] }}
-              </p>
-            </div>
-          </div>
-          <div class="card-footer">
-            <ng-container
-              *ngIf="
-                authService.getOauth2User() !== null &&
-                  authService.getOauth2User().friend;
-                then isFriend;
-                else isNotFriend
-              "
-            >
-            </ng-container>
-
-            <ng-template #isFriend>
-              <a
-                href="https://lin.ee/uwocKqR"
-                aria-label="Friended"
-                role="tooltip"
-                aria-haspopup="true"
-                class="btn btn-line tooltip tooltip-md"
-              >
-                <clr-icon shape="check" size="24"></clr-icon>
-                Friended
-                <span class="tooltip-content"
-                  >{{ environment.appTitle }} is already your friend. Chat with
-                  me now!</span
-                >
-              </a></ng-template
-            >
-            <ng-template #isNotFriend>
-              <a
-                href="https://lin.ee/uwocKqR"
-                aria-label="Add Friend"
-                role="tooltip"
-                aria-haspopup="true"
-                class="btn btn-line tooltip tooltip-md"
-              >
-                <span class="line-logo"></span>
-                Add Friend
-                <span class="tooltip-content"
-                  >Add {{ environment.appTitle }} as friend</span
-                ></a
-              ></ng-template
-            >
-
-            <span class="label label-info">{{ friends }}</span>
-          </div>
+    <div class="card">
+      <div class="card-header">
+        <app-doughnut-chart
+          [labels]="doughnutChartLabels"
+          [data]="doughnutChartData"
+          [ready]="doughtnutChartReady"
+        ></app-doughnut-chart>
+      </div>
+      <div class="card-block">
+        <div class="card-title">
+          <h1>{{ doughnutChartTitle }}</h1>
         </div>
+        <div class="card-text">
+          <p *ngFor="let item of doughnutChartLabels; index as i">
+            {{ item }}: {{ doughnutChartData[0][i] }}
+          </p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <ng-container
+          *ngIf="
+            authService.getOauth2User() !== null &&
+              authService.getOauth2User().friend;
+            then isFriend;
+            else isNotFriend
+          "
+        >
+        </ng-container>
+
+        <ng-template #isFriend>
+          <a
+            href="https://lin.ee/uwocKqR"
+            aria-label="Friended"
+            role="tooltip"
+            aria-haspopup="true"
+            class="btn btn-line tooltip tooltip-md"
+          >
+            <clr-icon shape="check" size="24"></clr-icon>
+            Friended
+            <span class="tooltip-content"
+              >{{ environment.appTitle }} is already your friend. Chat with me
+              now!</span
+            >
+          </a></ng-template
+        >
+        <ng-template #isNotFriend>
+          <a
+            href="https://lin.ee/uwocKqR"
+            aria-label="Add Friend"
+            role="tooltip"
+            aria-haspopup="true"
+            class="btn btn-line tooltip tooltip-md"
+          >
+            <span class="line-logo"></span>
+            Add Friend
+            <span class="tooltip-content"
+              >Add {{ environment.appTitle }} as friend</span
+            ></a
+          ></ng-template
+        >
+
+        <span class="label label-info">{{ friends }}</span>
       </div>
     </div>
   </div>

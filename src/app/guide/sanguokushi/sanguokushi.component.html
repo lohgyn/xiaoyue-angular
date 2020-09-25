@@ -1,147 +1,155 @@
-<section class="guide-container">
-  <div class="clr-row">
-    <div class="clr-sm-12 clr-col-lg-10 left-panel">
-      <clr-tabs>
-        <clr-tab>
-          <a href="/guide/sanguogushi#top" clrTabLink>新三國志手機版</a>
-        </clr-tab>
-        <clr-tab>
-          <a
-            href="/guide/sanguogushi#xiaoyue"
-            clrTabLink
-            [clrTabLinkInOverflow]="true"
-            >呼叫小月</a
-          >
-        </clr-tab>
-        <clr-tab>
-          <a
-            href="/guide/sanguogushi#dadian"
-            clrTabLink
-            [clrTabLinkInOverflow]="true"
-            >大殿等級</a
-          >
-        </clr-tab>
+<div class="guide-container">
+  <div class="guide-content-area">
+    <section id="top">
+      <div class="card card-block" style="margin-top: 0">
+        <h1 class="card-title"><b>新三國志手機版</b></h1>
+        <p class="card-text">
+          <ng-container [ngTemplateOutlet]="lineChickTemplate"></ng-container
+          >大家好！<b>S39-S40</b> 的專屬小月在這裏教你一些簡單的指令。<span
+            class="no-flex sally-face-love-sm inline-block vertical-align-bottom"
+            aria-hidden="true"
+          ></span>
+        </p>
+      </div>
+    </section>
 
-        <clr-tab>
-          <a
-            href="/guide/sanguogushi#secret"
-            clrTabLink
-            [clrTabLinkInOverflow]="true"
-            >隱藏功能</a
-          >
-        </clr-tab>
-      </clr-tabs>
-      <section class="main-section">
-        <div class="clr-row">
-          <div class="clr-col-sm-12">
-            <div id="top" class="card card-block">
-              <h1 class="card-title"><b>新三國志手機版</b></h1>
-              <p class="card-text">
-                <ng-container
-                  [ngTemplateOutlet]="lineChickTemplate"
-                ></ng-container
-                >大家好！<b>S39-S40</b>
-                的專屬小月在這裏教你一些簡單的指令。<span
-                  class="no-flex sally-face-love-sm inline-block vertical-align-bottom"
-                  aria-hidden="true"
-                ></span>
-              </p>
-            </div>
+    <section id="xiaoyue">
+      <div class="card">
+        <div class="card-block">
+          <h1 class="card-title"><b>呼叫小月</b></h1>
+          <p class="card-text">在個人或群組裏，請輸入 <b>’小月‘</b></p>
+        </div>
+        <div class="card-block">
+          <div class="card-img">
+            <img src="../../../assets/images/bbg-sangokushi/xiaoyue.jpg" />
           </div>
         </div>
+        <div class="card-block">
+          <p class="card-text">
+            然後在以上的指令中，選擇和輸入你要的資訊。例如：大殿等級
+          </p>
+        </div>
+      </div>
+    </section>
 
-        <div class="clr-row">
-          <div class="clr-col-sm-12">
-            <section id="xiaoyue">
-              <div class="card">
-                <div class="card-block">
-                  <h1 class="card-title"><b>呼叫小月</b></h1>
-                  <p class="card-text">在個人或群組裏，請輸入 <b>’小月‘</b></p>
-                </div>
-                <div class="card-block">
-                  <div class="clr-row">
-                    <div class="clr-col-sm-6">
-                      <div class="card-img">
-                        <img
-                          src="../../../assets/images/bbg-sangokushi/xiaoyue.jpg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-block">
-                  <p class="card-text">
-                    然後在以上的指令中，選擇和輸入你要的資訊。例如：大殿等級
-                  </p>
-                </div>
-              </div>
-            </section>
-            <section id="dadian">
-              <div class="card">
-                <div class="card-block">
-                  <h1 id="dadian" class="card-title"><b>大殿等級</b></h1>
-                </div>
-                <div class="card-img">
-                  <img src="../../../assets/images/bbg-sangokushi/dd.png" />
-                </div>
-                <div class="card-block">
-                  <p class="card-text">
-                    請輸入需要升級的大殿等級， 如大殿50或dd50
-                    51-60請打「大殿金礦」或dd51
-                  </p>
-                </div>
-                <div class="card-img">
-                  <img src="../../../assets/images/bbg-sangokushi/dd51.png" />
-                </div>
-              </div>
-            </section>
-          </div>
+    <section id="dadian">
+      <div class="card">
+        <div class="card-block">
+          <h1 id="dadian" class="card-title"><b>大殿等級</b></h1>
         </div>
-        <div class="clr-row">
-          <div class="clr-col-sm-12">
-            <section id="secret">
-              <div class="card card-block">
-                <h1 class="card-title"><b>隱藏功能</b></h1>
-                <p class="card-text">
-                  <ng-container
-                    [ngTemplateOutlet]="lineChickTemplate"
-                  ></ng-container
-                  >小月還有一些隱藏的功能，就等你們慢慢去發掘了。。。
-                </p>
-                <p>
-                  <ng-container
-                    [ngTemplateOutlet]="lineChickTemplate"
-                  ></ng-container
-                  >如果有興趣要加入小月的管理員，請聯絡 <b>@lohgyn</b> 或者
-                  <b>彭寒劍（五皇團員）</b>，來幫忙更新游戲質詢。。。<span
-                    class="no-flex sally-face-love-sm inline-block vertical-align-bottom"
-                    aria-hidden="true"
-                  ></span
-                  ><span
-                    class="no-flex sally-face-love-sm inline-block vertical-align-bottom"
-                    aria-hidden="true"
-                  ></span
-                  ><span
-                    class="no-flex sally-face-love-sm inline-block vertical-align-bottom"
-                    aria-hidden="true"
-                  ></span>
-                </p>
-              </div>
-            </section>
-          </div>
+        <div class="card-img">
+          <img src="../../../assets/images/bbg-sangokushi/dd.png" />
         </div>
-      </section>
-    </div>
-    <div class="clr-col clr-col-lg-2 wall"></div>
+        <div class="card-block">
+          <p class="card-text">
+            請輸入需要升級的大殿等級， 如大殿50或dd50
+            51-60請打「大殿金礦」或dd51
+          </p>
+        </div>
+        <div class="card-img">
+          <img src="../../../assets/images/bbg-sangokushi/dd51.png" />
+        </div>
+      </div>
+    </section>
+
+    <section id="secret">
+      <div class="card card-block">
+        <h1 class="card-title"><b>隱藏功能</b></h1>
+        <p class="card-text">
+          <ng-container [ngTemplateOutlet]="lineChickTemplate"></ng-container
+          >小月還有一些隱藏的功能，就等你們慢慢去發掘了。。。
+        </p>
+        <p>
+          <ng-container [ngTemplateOutlet]="lineChickTemplate"></ng-container
+          >如果有興趣要加入小月的管理員，請聯絡 <b>@lohgyn</b> 或者
+          <b>彭寒劍（五皇團員）</b>，來幫忙更新游戲質詢。。。<span
+            class="no-flex sally-face-love-sm inline-block vertical-align-bottom"
+            aria-hidden="true"
+          ></span
+          ><span
+            class="no-flex sally-face-love-sm inline-block vertical-align-bottom"
+            aria-hidden="true"
+          ></span
+          ><span
+            class="no-flex sally-face-love-sm inline-block vertical-align-bottom"
+            aria-hidden="true"
+          ></span>
+        </p>
+      </div>
+    </section>
   </div>
-</section>
+  <div class="guide-nav">
+    <clr-vertical-nav class="guide-nav-container">
+      <a
+        clrVerticalNavLink
+        href="/guide/sanguogushi#top"
+        [ngClass]="{ active: isActiveFragment('top') }"
+        (click)="setActiveFragment('top')"
+        >新三國志手機版</a
+      >
 
-<ng-template #lineChickTemplate>
-  <img
-    src="{{ lineChickDataUri }}"
-    alt="(chick)"
-    width="27"
-    height="23"
-    data-emoji="chick"
-  />
-</ng-template>
+      <a
+        clrVerticalNavLink
+        href="/guide/sanguogushi#xiaoyue"
+        [ngClass]="{ active: isActiveFragment('xiaoyue') }"
+        (click)="setActiveFragment('xiaoyue')"
+        >呼叫小月</a
+      >
+      <a
+        clrVerticalNavLink
+        href="/guide/sanguogushi#dadian"
+        [ngClass]="{ active: isActiveFragment('dadian') }"
+        (click)="setActiveFragment('dadian')"
+        >大殿等級</a
+      >
+      <a
+        clrVerticalNavLink
+        href="/guide/sanguogushi#secret"
+        [ngClass]="{ active: isActiveFragment('secret') }"
+        (click)="setActiveFragment('secret')"
+        >隱藏功能</a
+      >
+    </clr-vertical-nav>
+
+    <clr-tabs class="guide-tab-container">
+      <clr-tab>
+        <a href="/guide/sanguogushi#top" clrTabLink>新三國志手機版</a>
+      </clr-tab>
+      <clr-tab>
+        <a
+          href="/guide/sanguogushi#xiaoyue"
+          clrTabLink
+          [clrTabLinkInOverflow]="true"
+          >呼叫小月</a
+        >
+      </clr-tab>
+      <clr-tab>
+        <a
+          href="/guide/sanguogushi#dadian"
+          clrTabLink
+          [clrTabLinkInOverflow]="true"
+          >大殿等級</a
+        >
+      </clr-tab>
+
+      <clr-tab>
+        <a
+          href="/guide/sanguogushi#secret"
+          clrTabLink
+          [clrTabLinkInOverflow]="true"
+          >隱藏功能</a
+        >
+      </clr-tab>
+    </clr-tabs>
+  </div>
+
+  <ng-template #lineChickTemplate>
+    <img
+      src="{{ lineChickDataUri }}"
+      alt="(chick)"
+      width="27"
+      height="23"
+      data-emoji="chick"
+    />
+  </ng-template>
+</div>
