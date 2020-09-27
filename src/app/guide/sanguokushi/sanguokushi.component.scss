@@ -15,7 +15,7 @@
   order: 1;
   flex: 0 0 auto;
   width: 30vw;
-  background-image: url(../../../assets/images/line-corp/sally/wall.jpg);
+  background-image: url(../../../assets/images/line-corp/sally/wall.webp);
   background-size: 100%;
 }
 
@@ -62,14 +62,4 @@
     flex: 0 0 auto;
     width: 100vw;
   }
-}
-
-.sanguokushi-main-icon-sm {
-  height: 48px !important;
-  width: 48px !important;
-  background: url(../../../assets/images/bbg-sangokushi/main.jpg) no-repeat
-    center;
-  background-size: 100%;
-  display: inline-block;
-  vertical-align: middle;
 }
