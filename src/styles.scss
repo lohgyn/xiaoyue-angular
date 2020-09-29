@@ -115,8 +115,13 @@
   ngx-charts-chart {
     .ngx-charts-outer {
       .chart-legend {
-        .legend-labels {
-          white-space: normal;
+        .legend-wrap {
+          .legend-labels {
+            *:focus {
+              outline: none;
+            }
+            white-space: normal;
+          }
         }
 
         .header,
