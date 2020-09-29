@@ -26,11 +26,10 @@
     "@clr/angular": "4.0.2",
     "@clr/icons": "4.0.2",
     "@clr/ui": "4.0.2",
+    "@swimlane/ngx-charts": "^16.0.0",
     "@webcomponents/webcomponentsjs": "^2.0.0",
-    "chart.js": "^2.9.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "ng2-charts": "^2.4.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

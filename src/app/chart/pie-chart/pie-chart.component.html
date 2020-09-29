@@ -1,0 +1,30 @@
+<ng-container *ngIf="ready; then show; else loading"></ng-container>
+
+<ng-template #show>
+  <div
+    *ngIf="title !== undefined && title !== null && title.length > 0"
+    class="chart-title text-center"
+  >
+    <h1>{{ title }}</h1>
+  </div>
+  <div class="chart-area">
+    <ngx-charts-pie-chart
+      class="no-clarity-header"
+      [view]="actualView"
+      [results]="data"
+      [labels]="labels"
+      [legend]="legend"
+      [legendTitle]="legendTitle"
+      [legendPosition]="legendPosition"
+      [trimLabels]="trimLabels"
+      [explodeSlices]="explodeSlices"
+    >
+    </ngx-charts-pie-chart>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="centered-content-area">
+    <div class="spinner">Loading...</div>
+  </div>
+</ng-template>

@@ -111,3 +111,28 @@
 .sally-brush:hover {
   opacity: 0.8;
 }
+.no-clarity-header {
+  ngx-charts-chart {
+    .ngx-charts-outer {
+      .chart-legend {
+        .legend-labels {
+          white-space: normal;
+        }
+
+        .header,
+        header {
+          display: -webkit-box;
+          display: inherit;
+          color: inherit;
+          height: inherit;
+          white-space: nowrap;
+        }
+
+        header,
+        header.header-1 {
+          background-color: inherit;
+        }
+      }
+    }
+  }
+}

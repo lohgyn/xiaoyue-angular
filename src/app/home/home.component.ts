@@ -1,5 +1,5 @@
 import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
-import { Label, MultiDataSet } from 'ng2-charts';
+import { DataItem, SingleSeries } from '@swimlane/ngx-charts';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Animations } from 'src/app/animation/animations';
@@ -22,11 +22,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   friends = 0;
   environment: any;
 
-  // doughnut chart
-  doughnutChartTitle: string;
-  doughnutChartLabels: Label[];
-  doughnutChartData: MultiDataSet;
-  doughtnutChartReady: boolean;
+  // pie-chart chart
+  pieChartReady = false;
+  pieChartView: [number, number];
+  pieChartTitle: string;
+  pieChartData: SingleSeries;
 
   constructor(
     public authService: AuthService,
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.environment = environment;
-    this.initDoughnutChart();
+    this.initPieChart();
   }
 
   ngOnDestroy(): void {
@@ -44,11 +44,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.destroySubscriber.complete();
   }
 
-  initDoughnutChart(): void {
-    this.doughnutChartTitle = `${environment.appTitle}'s friends`;
-    this.doughtnutChartReady = false;
-    this.doughnutChartLabels = ['Friends added', 'Target reach', 'Blocking'];
-    this.doughnutChartData = [[0, 0, 0]];
+  initPieChart(): void {
+    const friendsChartData: DataItem = {
+      name: 'Friends Added',
+      value: 5,
+    };
+
+    const targetChartData: DataItem = {
+      name: 'Target reach',
+      value: 4,
+    };
+
+    const blocksChartData: DataItem = {
+      name: 'Blocking',
+      value: 3,
+    };
+
     this.apiService
       .getNumberOfFollower()
       .pipe(takeUntil(this.destroySubscriber))
@@ -58,19 +69,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
           if (numberOfFollowers.status === 'ready') {
             this.friends = numberOfFollowers.targetedReaches;
-            this.doughnutChartData = [
-              [
-                numberOfFollowers.targetedReaches,
-                numberOfFollowers.followers,
-                numberOfFollowers.blocks,
-              ],
-            ];
-          } else {
-            this.doughnutChartData = [[0, 0, 0]];
+
+            friendsChartData.value = numberOfFollowers.targetedReaches;
+            targetChartData.value = numberOfFollowers.followers;
+            blocksChartData.value = numberOfFollowers.blocks;
           }
         },
         (err) => {
-          this.doughnutChartData = [[0, 0, 0]];
           if (!environment.production) {
             console.error(err);
           }
@@ -81,6 +86,14 @@ export class HomeComponent implements OnInit, OnDestroy {
           );
         }
       )
-      .add(() => (this.doughtnutChartReady = true));
+      .add(() => {
+        this.pieChartReady = true;
+        this.pieChartTitle = `${environment.appTitle}'s friends`;
+        this.pieChartData = [
+          friendsChartData,
+          targetChartData,
+          blocksChartData,
+        ];
+      });
   }
 }

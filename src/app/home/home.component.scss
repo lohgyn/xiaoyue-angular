@@ -1,7 +1,39 @@
+.content-area {
+  display: flex;
+  flex-direction: column;
+}
+.pie-chart-area {
+  flex: 0 0 auto;
+  padding: 0.6rem;
+  border-radius: var(--clr-global-borderradius);
+  border-width: var(--clr-global-borderwidth);
+  border-color: var(--clr-color-neutral-300);
+  border-style: solid;
+}
+
+.pie-chart-info {
+  flex: 0 0 auto;
+  padding: 0 0.6rem 0 0.6rem;
+  border-radius: var(--clr-global-borderradius);
+  border-width: var(--clr-global-borderwidth);
+  border-color: var(--clr-color-neutral-300);
+  border-style: solid;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+
+  p {
+    margin-top: 0.6rem;
+  }
+
+  p:last-child {
+    margin-bottom: 0.6rem;
+  }
+}
+
 .btn-line {
   border-color: #00c300;
   background-color: #00c300;
-  color: #FFF;
+  color: #fff;
 }
 
 .line-logo {
@@ -13,4 +45,3 @@
   vertical-align: middle;
   display: inline-block;
 }
-
