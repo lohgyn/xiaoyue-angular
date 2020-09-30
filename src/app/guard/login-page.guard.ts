@@ -24,7 +24,6 @@ export class LoginPageGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-
     // If logged in, redirect to home page.
     return this.auth.getOauth2User().pipe(
       map((oauth2User) => {

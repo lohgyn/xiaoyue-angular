@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-  CanActivate,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
+  CanActivate,
   Router,
+  RouterStateSnapshot,
+  UrlTree
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -24,7 +24,6 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-
     // If Not Logged in, redirect to login page
     return this.auth.getOauth2User().pipe(
       map((oauth2User) => {
