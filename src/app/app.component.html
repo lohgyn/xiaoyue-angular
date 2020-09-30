@@ -44,21 +44,22 @@
 
     <div class="header-actions">
       <ng-container
-        *ngIf="{ oauth2User: authService.getOauth2User() | async } as data"
+        *ngIf="{ oAuth2User: authService.getOauth2User() | async } as data"
       >
         <ng-container
-          *ngIf="data.oauth2User !== null; then loggedIn; else loggedOut"
+          [ngTemplateOutlet]="data.oAuth2User !== null ? loggedIn : loggedOut"
+          [ngTemplateOutletContext]="{ user: data.oAuth2User }"
         >
         </ng-container>
 
-        <ng-template #loggedIn>
+        <ng-template #loggedIn let-user="user">
           <clr-dropdown>
             <button
               class="nav-text"
               clrDropdownTrigger
               aria-label="open user profile"
             >
-              {{ data.oAuth2User.displayName }}
+              {{ user.displayName }}
               <clr-icon shape="caret down"></clr-icon>
             </button>
             <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
