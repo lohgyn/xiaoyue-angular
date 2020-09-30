@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
-import { Animations } from './animation/animations';
 import { Alert } from './model/alert';
 import { NumberOfFollower } from './model/number-of-follower';
 import { AlertService } from './service/alert.service';
@@ -12,8 +11,7 @@ import { SpinnerService } from './service/spinner.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [Animations.inOutAnimation],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
 

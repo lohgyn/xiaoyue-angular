@@ -1,10 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginPageGuard } from './guard/login-page.guard';
-import { GuideComponent } from './guide/guide.component';
-import { SanguokushiComponent } from './guide/sanguokushi/sanguokushi.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -14,37 +9,29 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent,
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
     path: 'dashboard',
-    component: HomeComponent,
+    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
     path: 'guide',
-    component: GuideComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: 'sanguogushi',
-        pathMatch: 'full',
-      },
-      {
-        path: 'sanguogushi',
-        component: SanguokushiComponent,
-      },
-    ],
+    loadChildren: () =>
+      import('./guide/guide.module').then((m) => m.GuideModule),
   },
   {
     path: 'login',
-    component: LoginComponent,
-    canActivate: [LoginPageGuard],
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginModule),
   },
   { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

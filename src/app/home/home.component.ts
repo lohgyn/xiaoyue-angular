@@ -2,7 +2,6 @@ import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { DataItem, SingleSeries } from '@swimlane/ngx-charts';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Animations } from 'src/app/animation/animations';
 import { AuthService } from 'src/app/service/auth.service';
 import { environment } from 'src/environments/environment';
 import { AlertService } from '../service/alert.service';
@@ -12,7 +11,6 @@ import { ApiService } from '../service/api.service';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  animations: [Animations.inOutAnimation],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   @HostBinding('class') class = 'u-main-container';
