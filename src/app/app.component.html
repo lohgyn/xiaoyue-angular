@@ -1,7 +1,7 @@
 <clr-main-container>
   <clr-alerts>
     <clr-alert
-      *ngFor="let alert of alertService.getAlerts()"
+      *ngFor="let alert of alertService.getAlerts() | async"
       [clrAlertType]="alert.type"
       [clrAlertAppLevel]="true"
       (clrAlertClosedChange)="onAlertClose(alert)"
@@ -44,48 +44,48 @@
 
     <div class="header-actions">
       <ng-container
-        *ngIf="
-          authService.getOauth2User() !== null;
-          then loggedIn;
-          else loggedOut
-        "
+        *ngIf="{ oauth2User: authService.getOauth2User() | async } as data"
       >
-      </ng-container>
-
-      <ng-template #loggedIn>
-        <clr-dropdown>
-          <button
-            class="nav-text"
-            clrDropdownTrigger
-            aria-label="open user profile"
-          >
-            {{ authService.getOauth2User().displayName }}
-            <clr-icon shape="caret down"></clr-icon>
-          </button>
-          <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-            <a routerLink="/" routerLinkActive="active" clrDropdownItem
-              >Preferences</a
-            >
-            <a clrDropdownItem (click)="authService.logout()"
-              ><span class="sally-face-sad-sm"></span>Log out</a
-            >
-          </clr-dropdown-menu>
-        </clr-dropdown>
-      </ng-template>
-      <ng-template #loggedOut>
-        <a
-          routerLink="/login"
-          routerLinkActive="active"
-          class="nav-link nav-text"
-          ><span class="line-word-logo"></span>Log In</a
+        <ng-container
+          *ngIf="data.oauth2User !== null; then loggedIn; else loggedOut"
         >
-      </ng-template>
+        </ng-container>
+
+        <ng-template #loggedIn>
+          <clr-dropdown>
+            <button
+              class="nav-text"
+              clrDropdownTrigger
+              aria-label="open user profile"
+            >
+              {{ data.oAuth2User.displayName }}
+              <clr-icon shape="caret down"></clr-icon>
+            </button>
+            <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+              <a routerLink="/" routerLinkActive="active" clrDropdownItem
+                >Preferences</a
+              >
+              <a clrDropdownItem (click)="authService.logout(false)"
+                ><span class="sally-face-sad-sm"></span>Log out</a
+              >
+            </clr-dropdown-menu>
+          </clr-dropdown>
+        </ng-template>
+        <ng-template #loggedOut>
+          <a
+            routerLink="/login"
+            routerLinkActive="active"
+            class="nav-link nav-text"
+            ><span class="line-word-logo"></span>Log In</a
+          >
+        </ng-template>
+      </ng-container>
     </div>
   </clr-header>
   <router-outlet></router-outlet>
 </clr-main-container>
 
-<div *ngIf="spinnerService.isLoading()" class="modal-backdrop">
+<div *ngIf="spinnerService.isLoading() | async" class="modal-backdrop">
   <div class="centered-content-area">
     <div class="spinner">Loading...</div>
   </div>

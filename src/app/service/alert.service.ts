@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Alert } from '../model/alert';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AlertService {
-  private alerts: Alert[] = [];
+  private _alerts: BehaviorSubject<Alert[]> = new BehaviorSubject([]);
 
   constructor() {}
 
@@ -18,27 +19,32 @@ export class AlertService {
       click(obj: any): any;
     }
   ): void {
+    const alerts = this._alerts.getValue();
+    let newAlert: Alert;
     if (typeof alert === 'string') {
       if (type === undefined) {
         type = 'info';
-      } else {
       }
-      this.alerts.push({
-        id: '' + new Date().getTime() + this.alerts.length,
+
+      newAlert = {
+        id: '' + new Date().getTime() + alerts.length,
         type,
         text: alert,
         action,
-      });
+      };
     } else {
-      this.alerts.push(alert);
+      newAlert = alert;
     }
+    alerts.push(newAlert);
+    this._alerts.next(alerts);
   }
 
   removeAlert(alertToRemove: Alert): void {
-    this.alerts = this.alerts.filter((alert) => alert.id !== alertToRemove.id);
+    const alerts = this._alerts.getValue();
+    this._alerts.next(alerts.filter((alert) => alert.id !== alertToRemove.id));
   }
 
-  getAlerts(): Alert[] {
-    return this.alerts;
+  getAlerts(): Observable<Alert[]> {
+    return this._alerts.asObservable();
   }
 }

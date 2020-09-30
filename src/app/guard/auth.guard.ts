@@ -7,6 +7,7 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from '../service/auth.service';
 
 @Injectable({
@@ -24,12 +25,17 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
 
-    // If Not Logged in, redirect to login
-    if (this.auth.getOauth2User() === null) {
-      this.router.navigate(['/login']);
-      return false;
-    }
+    // If Not Logged in, redirect to login page
+    return this.auth.getOauth2User().pipe(
+      map((oauth2User) => {
+        const loggedIn = oauth2User !== null;
 
-    return true;
+        if (!loggedIn) {
+          this.router.navigate(['/login']);
+        }
+
+        return loggedIn;
+      })
+    );
   }
 }

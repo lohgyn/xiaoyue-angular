@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Oauth2User } from '../model/oauth2-user';
 import { AlertService } from './alert.service';
@@ -17,17 +18,18 @@ export class AuthService {
     private spinnerService: SpinnerService
   ) {}
 
-  private oauth2User: Oauth2User = null;
+  private _oauth2User: BehaviorSubject<Oauth2User> = new BehaviorSubject(null);
 
   public setOauth2User(oauth2User: Oauth2User): void {
     if (oauth2User !== null) {
       sessionStorage.setItem('oauth2-user', JSON.stringify(oauth2User));
     }
-    this.oauth2User = oauth2User;
+
+    this._oauth2User.next(oauth2User);
   }
 
-  public getOauth2User(): Oauth2User {
-    return this.oauth2User;
+  public getOauth2User(): Observable<Oauth2User> {
+    return this._oauth2User.asObservable();
   }
 
   public tryAuthenticate(): void {
@@ -37,13 +39,13 @@ export class AuthService {
 
     if (!environment.production) {
       console.log(`start-check-oauth2-user: ${startCheckOAuth2User}`);
-      console.log(`oauth2-user: ${this.oauth2User}`);
+      console.log(`oauth2-user: ${this._oauth2User.getValue()}`);
     }
 
     if (startCheckOAuth2User !== null && startCheckOAuth2User !== 'null') {
       let refreshOauth2User = true;
 
-      if (this.oauth2User === null) {
+      if (this._oauth2User.getValue() === null) {
         const oauth2UserJSON = sessionStorage.getItem('oauth2-user');
 
         if (oauth2UserJSON !== null && oauth2UserJSON !== 'null') {

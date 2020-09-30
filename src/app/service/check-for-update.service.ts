@@ -9,13 +9,13 @@ import { AlertService } from './alert.service';
 })
 export class CheckForUpdateService {
   constructor(
-    appRef: ApplicationRef,
+    private appRef: ApplicationRef,
     private updates: SwUpdate,
     private alertService: AlertService
   ) {
     // Allow the app to stabilize first, before starting polling for updates with `interval()`.
     if (updates.isEnabled) {
-      const appIsStable$ = appRef.isStable.pipe(
+      const appIsStable$ = this.appRef.isStable.pipe(
         first((isStable) => isStable === true)
       );
 
