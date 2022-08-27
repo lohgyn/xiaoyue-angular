@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { Util } from 'src/app/shared/util';
 
 @Component({
@@ -6,7 +6,7 @@ import { Util } from 'src/app/shared/util';
   templateUrl: './sanguokushi.component.html',
   styleUrls: ['./sanguokushi.component.scss'],
 })
-export class SanguokushiComponent implements OnInit {
+export class SanguokushiComponent {
   @HostBinding('class') class = 'content-area no-padding';
 
   lineChickDataUri = Util.getLineChickDataUri();
@@ -14,8 +14,6 @@ export class SanguokushiComponent implements OnInit {
   fragment = 'top';
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   isActiveFragment(fragment: string): boolean {
     return fragment === this.fragment;

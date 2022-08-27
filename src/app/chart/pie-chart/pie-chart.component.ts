@@ -4,7 +4,6 @@ import {
   HostListener,
   Input,
   OnChanges,
-  OnInit,
   SimpleChanges,
 } from '@angular/core';
 import { SingleSeries } from '@swimlane/ngx-charts';
@@ -14,7 +13,7 @@ import { SingleSeries } from '@swimlane/ngx-charts';
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.scss'],
 })
-export class PieChartComponent implements OnInit, OnChanges {
+export class PieChartComponent implements OnChanges {
   @Input()
   view: [number, number];
 
@@ -64,8 +63,6 @@ export class PieChartComponent implements OnInit, OnChanges {
       }
     }
   }
-
-  ngOnInit(): void {}
 
   checkData(data: SingleSeries): void {
     if (
