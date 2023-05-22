@@ -7,7 +7,4 @@ import { Component, HostBinding } from '@angular/core';
 })
 export class GuideComponent {
   @HostBinding('class') class = 'u-main-container';
-
-  constructor() {}
-
 }

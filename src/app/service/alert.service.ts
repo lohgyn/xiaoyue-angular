@@ -8,8 +8,6 @@ import { Alert } from '../model/alert';
 export class AlertService {
   private _alerts: BehaviorSubject<Alert[]> = new BehaviorSubject([]);
 
-  constructor() {}
-
   addAlert(
     alert: Alert | string,
     type?: 'info' | 'warning' | 'success' | 'danger',

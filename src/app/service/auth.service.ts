@@ -11,20 +11,36 @@ import { SpinnerService } from './spinner.service';
   providedIn: 'root',
 })
 export class AuthService {
+  private _oauth2User: BehaviorSubject<Oauth2User> = new BehaviorSubject(null);
+
   constructor(
     private httpClient: HttpClient,
     private router: Router,
     private alertService: AlertService,
     private spinnerService: SpinnerService
-  ) {}
+  ) {
+    this.initOauth2User();
+  }
 
-  private _oauth2User: BehaviorSubject<Oauth2User> = new BehaviorSubject(null);
+  private initOauth2User(): void {
+    const oauth2UserJSON = sessionStorage.getItem('oauth2-user');
 
-  public setOauth2User(oauth2User: Oauth2User): void {
-    if (oauth2User !== null) {
-      sessionStorage.setItem('oauth2-user', JSON.stringify(oauth2User));
+    if (oauth2UserJSON === null) {
+      return;
     }
 
+    this.setOauth2User(JSON.parse(oauth2UserJSON));
+  }
+
+  public setOauth2User(oauth2User: Oauth2User): void {
+    if (oauth2User === null) {
+      sessionStorage.removeItem('oauth2-user');
+      localStorage.removeItem('start-check-oauth2-user');
+      this._oauth2User.next(null);
+      return;
+    }
+
+    sessionStorage.setItem('oauth2-user', JSON.stringify(oauth2User));
     this._oauth2User.next(oauth2User);
   }
 
@@ -33,43 +49,13 @@ export class AuthService {
   }
 
   public tryAuthenticate(): void {
-    const startCheckOAuth2User = localStorage.getItem(
-      'start-check-oauth2-user'
-    );
-
-    if (!environment.production) {
-      console.log(`start-check-oauth2-user: ${startCheckOAuth2User}`);
-      console.log(`oauth2-user: ${this._oauth2User.getValue()}`);
+    if (!localStorage.getItem('start-check-oauth2-user')) {
+      return;
     }
 
-    if (startCheckOAuth2User !== null && startCheckOAuth2User !== 'null') {
-      let refreshOauth2User = true;
-
-      if (this._oauth2User.getValue() === null) {
-        const oauth2UserJSON = sessionStorage.getItem('oauth2-user');
-
-        if (oauth2UserJSON !== null && oauth2UserJSON !== 'null') {
-          try {
-            if (!environment.production) {
-              console.log(`oauth2UserJSON: ${oauth2UserJSON}`);
-            }
-
-            const oauth2User = JSON.parse(oauth2UserJSON);
-            this.setOauth2User(oauth2User);
-            refreshOauth2User = false;
-          } catch (error) {
-            if (!environment.production) {
-              console.log(`convert oauth2UserJSON error: ${error}`);
-            }
-          }
-        }
-      }
-
-      if (refreshOauth2User) {
-        this.httpClient
-          .get<Oauth2User>(`${environment.apiUri}/user`)
-          .subscribe((oauth2User) => this.setOauth2User(oauth2User));
-      }
+    if (this._oauth2User.getValue() !== null) {
+      this.refreshOauth2User();
+      return;
     }
   }
 
@@ -86,10 +72,7 @@ export class AuthService {
       .subscribe()
       .add(() => {
         {
-          localStorage.removeItem('start-check-oauth2-user');
-          sessionStorage.removeItem('oauth2-user');
           this.setOauth2User(null);
-
           this.router.navigate(['/']).finally(() => {
             this.spinnerService.setLoading(false);
 
@@ -109,5 +92,11 @@ export class AuthService {
       console.log('start to check oauth2 user now...');
     }
     localStorage.setItem('start-check-oauth2-user', 'true');
+  }
+
+  private refreshOauth2User(): void {
+    this.httpClient
+      .get<Oauth2User>(`${environment.apiUri}/user`)
+      .subscribe((oauth2User) => this.setOauth2User(oauth2User));
   }
 }

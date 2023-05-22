@@ -7,8 +7,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class SpinnerService {
   private _loading: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor() {}
-
   public isLoading(): Observable<boolean> {
     return this._loading.asObservable();
   }

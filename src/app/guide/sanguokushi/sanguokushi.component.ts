@@ -13,8 +13,6 @@ export class SanguokushiComponent {
 
   fragment = 'top';
 
-  constructor() {}
-
   isActiveFragment(fragment: string): boolean {
     return fragment === this.fragment;
   }
