@@ -53,10 +53,11 @@ export class AuthService {
       return;
     }
 
-    if (this._oauth2User.getValue() !== null) {
-      this.refreshOauth2User();
+    if (this._oauth2User.getValue() === null) {
       return;
     }
+
+    this.refreshOauth2User();
   }
 
   public logout(force?: boolean): void {
