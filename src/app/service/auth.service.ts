@@ -53,7 +53,7 @@ export class AuthService {
       return;
     }
 
-    if (this._oauth2User.getValue() === null) {
+    if (this._oauth2User.getValue() !== null) {
       return;
     }
 
